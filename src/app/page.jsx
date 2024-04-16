@@ -38,7 +38,7 @@ export default function Home() {
   
   const [filter, setFilter] = useState("All");
 
-  const [sort, setSort] = useState("Asc");
+  const [sort, setSort] = useState("Asc");  
 
     const addTodo = (text, category) => {
       const newTodos = [
