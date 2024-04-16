@@ -17,16 +17,21 @@ export default function TodoForm({ addTodo }) {
     };
 
   return (
-    <div className="flex flex-col items-center justify-center py-8 px-8 bg-slate-300 rounded-2xl ">
-      <h2 className="text-2xl font-bold mb-4">Criar tarefa:</h2>
+    <div className="flex flex-col items-center justify-center p-2 bg-slate-300 rounded-2xl border-t-2 border-slate-400">
+      <h2 className="text-2xl font-bold mb-4 mt-4">Criar tarefa:</h2>
       <form onSubmit={handleSubmit}>
-              <input type="text" placeholder="Digite o título"
-                  className="p-2 mb-3 rounded-md w-full"
-                  value={value}
-                  onChange={(event) => setValue(event.target.value)}/>
-              <select className="p-2 mb-3 rounded-s-md w-full"
-                  value={category}
-                  onChange={(event) => setCategory(event.target.value)}>
+        <input
+          type="text"
+          placeholder="Digite o título"
+          className="p-2 mb-6 rounded-md w-full"
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+        />
+        <select
+          className="p-2 mb-6 rounded-s-md w-full"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        >
           <option value="">Selecione uma categoria</option>
           <option value="estudos">Estudos</option>
           <option value="trabalho">Trabalho</option>
