@@ -36,7 +36,8 @@ export default function Home() {
   
   const [search, setSearch] = useState("");
   
-  const [filter, setFIlter] = useState("All");
+  const [filter, setFilter] = useState("All");
+
   const [sort, setSort] = useState("Asc");
     
 
@@ -67,17 +68,18 @@ export default function Home() {
     setTodos(newTodos)
   }
   return (
-    <div className="flex flex-col items-center justify-center p-32">
+    <div className="flex flex-col items-center justify-center p-20">
       <div className="flex flex-col items-center justify-center py-8 px-8 bg-slate-300 rounded-2xl w-1/3">
         <h1 className="text-3xl font-bold mb-5">Lista de Tarefas</h1>
         <Search search={search} setSearch={setSearch} />
-        <Filter filter={filter} setFIlter={setFIlter} />
+        <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
         <div className="flex flex-col items-center justify-center  py-8 px-8 bg-slate-200 
         rounded-2xl w-4/5">
           {todos
             .filter((todo) => filter === "All" ? true : filter === "Completed"
               ? todo.isCompleted : !todo.isCompleted)
             .filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase()))
+            .sort((a,b) => sort === "Asc"? a.text.localeCompare(b.text) : b.text.localeCompare(a.text))
             .map((todo) => (
             <Todo key={todo.id} todo={todo} removeTodo={removeTodo} completeTodo={completeTodo} />
           ))}
