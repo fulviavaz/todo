@@ -4,6 +4,7 @@ import Search from "@/components/Search/Search";
 import Todo from "@/components/Todo/Todo";
 import TodoForm from "@/components/TodoForm/TodoForm";
 import { useState } from "react";
+import Modal from "@/components/Modal/Modal";
 
 
 export default function Home() {
@@ -38,9 +39,9 @@ export default function Home() {
   
   const [filter, setFilter] = useState("All");
 
-  const [sort, setSort] = useState("Asc");  
-
-  const [openModal, setOpenModal] = useState("false");
+  const [sort, setSort] = useState("Asc"); 
+  
+  const [showModal, setShowModal] = useState(false);
 
     const addTodo = (text, category) => {
       const newTodos = [
@@ -104,14 +105,15 @@ export default function Home() {
                 removeTodo={removeTodo}
                 completeTodo={completeTodo}
                 editTodo={editTodo}
-                openModal={openModal}
-                setOpenModal={setOpenModal}
+                setShowModal={setShowModal}
               />
             ))}
         </div>
         <TodoForm addTodo={addTodo} />
       </div>
-    
+      <>
+        <Modal isVisible={showModal} onClose={() => setShowModal(false) } />
+      </>
     </div>
   );
 }
