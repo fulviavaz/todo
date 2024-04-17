@@ -1,14 +1,21 @@
 import React from 'react'
 
-export default function Modal({ isVisible, onClose }) {
+export default function Modal({ isVisible, onClose, editTodo }) {
 
   if (!isVisible) {
     return null
   }
+
+  const handleClose = (e) => {
+    if (e.target.id === 'wrapper') {
+      onClose()
+    }
+  }
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-50 
-    background-blur-sm flex justify-center items-center"
+    background-blur-sm flex justify-center items-center" id="wrapper"
+      onClick={handleClose}      
     >
       <div className="bg-slate-200 p-6 rounded-md w-3/12 h-auto">
         <h2 className="text-2xl font-bold mb-4 mt-4">Editar tarefa:</h2>
@@ -27,7 +34,7 @@ export default function Modal({ isVisible, onClose }) {
           <button
             type="submit"
             className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 
-          rounded border-0 cursor-pointer transition-colors duration-300"
+          rounded border-0 cursor-pointer transition-colors duration-300" onClick={() => editTodo()}
           >
             Atualizar tarefa
           </button>

@@ -112,7 +112,7 @@ export default function Home() {
         <TodoForm addTodo={addTodo} />
       </div>
       <>
-        <Modal isVisible={showModal} onClose={() => setShowModal(false) } />
+        <Modal isVisible={showModal} onClose={() => setShowModal(false)} editTodo={ editTodo} />
       </>
     </div>
   );
