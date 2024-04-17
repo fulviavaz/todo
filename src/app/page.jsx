@@ -40,6 +40,8 @@ export default function Home() {
 
   const [sort, setSort] = useState("Asc");  
 
+  const [openModal, setOpenModal] = useState("false");
+
     const addTodo = (text, category) => {
       const newTodos = [
         ...todos,
@@ -52,7 +54,13 @@ export default function Home() {
       ];
       setTodos(newTodos);
     };
-
+  
+  const editTodo = (id, newText) => {
+    const newTodos = [...todos];
+    newTodos.map((todo) => todo.id === id ? todo.text = newText : todo)
+    setTodos(newTodos)
+  }
+  
     const removeTodo = (id) => {
       const newTodos = [...todos];
       const filteredTodos = newTodos.filter((todo) =>
@@ -72,9 +80,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold mb-5">Lista de Tarefas</h1>
         <Search search={search} setSearch={setSearch} />
         <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
-        <div
-          className="flex flex-col items-center justify-center p-2 rounded-2xl w-full"
-        >
+        <div className="flex flex-col items-center justify-center p-2 rounded-2xl w-full">
           {todos
             .filter((todo) =>
               filter === "All"
@@ -97,11 +103,15 @@ export default function Home() {
                 todo={todo}
                 removeTodo={removeTodo}
                 completeTodo={completeTodo}
+                editTodo={editTodo}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
               />
             ))}
         </div>
         <TodoForm addTodo={addTodo} />
       </div>
+    
     </div>
   );
 }

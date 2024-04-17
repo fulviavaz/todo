@@ -1,10 +1,11 @@
 
 /* eslint-disable react/jsx-key */
 import React from 'react'
+import Modal from "@/components/Modal/Modal";
 
-
-export default function Todo({ todo, removeTodo, completeTodo}) {
+export default function Todo({ todo, removeTodo, completeTodo, setOpenModal, openModal }) {
   
+
   
      
   return (
@@ -24,7 +25,8 @@ export default function Todo({ todo, removeTodo, completeTodo}) {
       <div className="flex  items-center justify-end  py-4 px-4 w-full">
         <button
           className=" bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-2 
-        rounded border-0 cursor-pointer transition-colors duration-300"
+        rounded border-0 cursor-pointer transition-colors duration-300"        
+          onClick={() => setOpenModal(true)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,6 +85,9 @@ export default function Todo({ todo, removeTodo, completeTodo}) {
           </svg>
         </button>
       </div>
+      <>
+        <Modal isOpen={openModal} />
+      </>
     </div>
   );
 }
