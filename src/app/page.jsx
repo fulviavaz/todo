@@ -56,10 +56,12 @@ export default function Home() {
       setTodos(newTodos);
     };
   
-  const editTodo = (id, newText) => {
-    const newTodos = [...todos];
-    newTodos.map((todo) => todo.id === id ? todo.text = newText : todo)
-    setTodos(newTodos)
+  const editTodo = id => {
+    setTodos(todos.map(todo => todo.id === id ? {
+      ...todo,
+      isEditing: !todo.isEditing
+    } : todo
+   ))
   }
   
     const removeTodo = (id) => {
@@ -103,8 +105,7 @@ export default function Home() {
                 key={todo.id}
                 todo={todo}
                 removeTodo={removeTodo}
-                completeTodo={completeTodo}
-                editTodo={editTodo}
+                completeTodo={completeTodo}              
                 setShowModal={setShowModal}
               />
             ))}
