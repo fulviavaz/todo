@@ -8,12 +8,14 @@
 
 <img src="./public/capa.jpg" alt="capa">
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+> Aplicação de gerenciamento de tarefas (to-do list)
 
 ### Funcionalidades
 
 - [x] Adicionar nova tarefa
-- [x] Filtros
+- [x] Filtrar as tarefas por status (concluídas e não concluídas).
+- [x] Filtrar as tarefas por ordem alfabética (ascendente e descendente)
+- [x] Pesquisar Tarefas
 - [x] Editar Tarefa
 - [x] Concluir Tarefa
 - [x] Excluir Tarefa
