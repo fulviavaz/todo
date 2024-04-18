@@ -78,12 +78,12 @@ export default function Home() {
     setTodos(newTodos)
   }
   return (
-    <div className="flex flex-col items-center justify-center p-10 ">
-      <div className="flex flex-col items-center justify-center p-10 bg-slate-300 rounded-2xl w-3/6">
+    <div className="flex flex-col items-center justify-center lg:p-10 p-6">
+      <div className="flex flex-col items-center justify-center lg:p-10 p-4 bg-slate-300 rounded-2xl lg:w-3/6 w-auto ">
         <h1 className="text-3xl font-bold mb-5">Lista de Tarefas</h1>
         <Search search={search} setSearch={setSearch} />
         <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
-        <div className="flex flex-col items-center justify-center p-2 rounded-2xl w-full">
+        <div className="flex flex-col items-center justify-center p-2 rounded-2xl lg:w-full">
           {todos
             .filter((todo) =>
               filter === "All"
