@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Filter from "@/components/Filter/Filter";
 import Search from "@/components/Search/Search";
 import Todo from "@/components/Todo/Todo";
@@ -6,77 +6,77 @@ import TodoForm from "@/components/TodoForm/TodoForm";
 import { useState } from "react";
 import Modal from "@/components/Modal/Modal";
 
-
 export default function Home() {
-    const [todos, setTodos] = useState([
-      {
-        id: 1,
-        text: "estudar nextjs",
-        category: "estudos",
-        isCompleted: false,
-      },
-      {
-        id: 2,
-        text: "criar novo design system",
-        category: "trabalho",
-        isCompleted: false,
-      },
-      {
-        id: 3,
-        text: "ir pra academia",
-        category: "pessoal",
-        isCompleted: false,
-      },
-      {
-        id: 4,
-        text: "comprar ração pro gato",
-        category: "pessoal",
-        isCompleted: false,
-      },
-    ]);
-  
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      text: "estudar nextjs",
+      category: "estudos",
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      text: "criar novo design system",
+      category: "trabalho",
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      text: "ir pra academia",
+      category: "pessoal",
+      isCompleted: false,
+    },
+    {
+      id: 4,
+      text: "comprar ração pro gato",
+      category: "pessoal",
+      isCompleted: false,
+    },
+  ]);
+
   const [search, setSearch] = useState("");
-  
   const [filter, setFilter] = useState("All");
-
-  const [sort, setSort] = useState("Asc"); 
-  
+  const [sort, setSort] = useState("Asc");
   const [showModal, setShowModal] = useState(false);
+  const [currentTodo, setCurrentTodo] = useState({});
 
-    const addTodo = (text, category) => {
-      const newTodos = [
-        ...todos,
-        {
-          id: Math.floor(Math.random() * 10000),
-          text,
-          category,
-          isCompleted: false,
-        },
-      ];
-      setTodos(newTodos);
-    };
-  
-  const editTodo = id => {
-    setTodos(todos.map(todo => todo.id === id ? {
-      ...todo,
-      isEditing: !todo.isEditing
-    } : todo
-   ))
-  }
-  
-    const removeTodo = (id) => {
-      const newTodos = [...todos];
-      const filteredTodos = newTodos.filter((todo) =>
-        todo.id !== id ? todo : null
-      );
-      setTodos(filteredTodos);
-    };
-  
+  const addTodo = (text, category) => {
+    const newTodos = [
+      ...todos,
+      {
+        id: Math.floor(Math.random() * 10000),
+        text,
+        category,
+        isCompleted: false,
+      },
+    ];
+    setTodos(newTodos);
+  };
+
+  const editTodo = (newTodo) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === newTodo.id ? { ...todo, ...newTodo } : todo
+      )
+    );
+  };
+
+  const removeTodo = (id) => {
+    const newTodos = [...todos];
+    const filteredTodos = newTodos.filter((todo) =>
+      todo.id !== id ? todo : null
+    );
+    setTodos(filteredTodos);
+  };
+
   const completeTodo = (id) => {
-    const newTodos = [...todos]
-    newTodos.map((todo) => todo.id === id ? todo.isCompleted = !todo.isCompleted : todo)
-    setTodos(newTodos)
-  }
+    const newTodos = [...todos];
+    newTodos.map((todo) =>
+      todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo
+    );
+    setTodos(newTodos);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center lg:p-10 p-6">
       <div className="flex flex-col items-center justify-center lg:p-10 p-4 bg-slate-300 rounded-2xl lg:w-3/6 w-auto ">
@@ -105,16 +105,22 @@ export default function Home() {
                 key={todo.id}
                 todo={todo}
                 removeTodo={removeTodo}
-                completeTodo={completeTodo}              
-                setShowModal={setShowModal}
+                completeTodo={completeTodo}
+                setShowModal={() => {
+                  setCurrentTodo(todo);
+                  setShowModal(true);
+                }}
               />
             ))}
         </div>
         <TodoForm addTodo={addTodo} />
       </div>
-      <>
-        <Modal isVisible={showModal} onClose={() => setShowModal(false)} editTodo={ editTodo} />
-      </>
+      <Modal
+        todo={currentTodo}
+        editTodo={editTodo}
+        isVisible={showModal}
+        onClose={() => setShowModal(false)}
+      />
     </div>
   );
 }
